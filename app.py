@@ -1,6 +1,5 @@
 
 from flask import Flask
-
 from flask import Flask,request, render_template, Response
 import cv2
 from keras.models import load_model
@@ -10,11 +9,8 @@ import numpy as np
 import datetime
 import os
 import tensorflow as tf
-
 import numpy as np
 import cv2
-
-
 global model,capture,frame
 
 
