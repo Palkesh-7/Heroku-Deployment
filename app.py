@@ -20,23 +20,9 @@ class_names = ['Potato___Early_blight',
               'Potato___Late_blight',
               'Potato___healthy']
 
-# class_names = ['Pepper__bell___Bacterial_spot',
-#               'Pepper__bell___healthy',
-#               'Potato___Early_blight',
-#               'Potato___Late_blight',
-#               'Potato___healthy',
-#               'Tomato_Bacterial_spot',
-#               'Tomato_Early_blight',
-#               'Tomato_Late_blight',
-#               'Tomato_Leaf_Mold',
-#               'Tomato_Septoria_leaf_spot',
-#               'Tomato_Spider_mites_Two_spotted_spider_mite',
-#               'Tomato__Target_Spot',
-#               'Tomato__Tomato_YellowLeaf__Curl_Virus',
-#               'Tomato__Tomato_mosaic_virus',
-#               'Tomato_healthy']
 
-model = load_model('/content/potatoes.h5')
+
+model = load_model('potatoes.h5')
 
 model.make_predict_function()
 
@@ -53,7 +39,7 @@ except OSError as error:
 
 camera = cv2.VideoCapture(0)
 
-def gen_frames():  # generate frame by frame from camera
+def gen_frames():  
     global out, capture,rec_frame
     while True:
         success, frame = camera.read()
@@ -79,7 +65,7 @@ def predict_label(image):
     image = np.array(Image.open(image).convert("RGB").resize((256, 256)))
 
 
-    image = image/255 # normalize the image in 0 to 1 range
+    image = image/255 
 
     img_array = tf.expand_dims(image, 0)
     predictions = model.predict(img_array)
@@ -89,7 +75,7 @@ def predict_label(image):
 
     return {"class": predicted_class, "confidence": confidence}
 
-# routes
+
 @app.route("/")
 def main():
     return render_template("index.html")
@@ -152,8 +138,7 @@ def get_output():
 
 
 
-# print(f"click here for website by globle link  {public_url}")
-# app.run(port=port_no)
+
 
 if __name__ =='__main__':
     app.run(debug = True)
