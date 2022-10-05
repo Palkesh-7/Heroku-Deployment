@@ -3,14 +3,13 @@ from flask import Flask
 from flask import Flask,request, render_template, Response
 import cv2
 from keras.models import load_model
-from keras.preprocessing import image
+# from keras.preprocessing import image
 from PIL import Image
 import numpy as np
 import datetime
 import os
 import tensorflow as tf
-import numpy as np
-import cv2
+
 global model,capture,frame
 
 
@@ -78,6 +77,7 @@ def predict_label(image):
     
 
     image = np.array(Image.open(image).convert("RGB").resize((256, 256)))
+
 
     image = image/255 # normalize the image in 0 to 1 range
 
